@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <!-- Favicon con el ícono del hacker -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20448%20512'%3E%3Cpath%20fill='%2300ff41'%20d='M144%20144c0-44.2%2035.8-80%2080-80s80%2035.8%2080%2080c0%204.4-3.6%208-8%208s-8-3.6-8-8c0-35.3-28.7-64-64-64s-64%2028.7-64%2064c0%204.4-3.6%208-8%208s-8-3.6-8-8zM216%20208c4.4%200%208%203.6%208%208v16c0%204.4-3.6%208-8%208s-8-3.6-8-8v-16c0-4.4%203.6-8%208-8zm-8%2088c-4.4%200-8%203.6-8%208v80c0%204.4%203.6%208%208%208s8-3.6%208-8v-80c0-4.4-3.6-8-8-8zm80-96c-4.4%200-8%203.6-8%208v16c0%204.4%203.6%208%208%208s8-3.6%208-8v-16c0-4.4-3.6-8-8-8zm-16%2064c-4.4%200-8%203.6-8%208v32c0%204.4%203.6%208%208%208s8-3.6%208-8v-32c0-4.4-3.6-8-8-8zM448%20352v-32c0-35.3-28.7-64-64-64H64c-35.3%200-64%2028.7-64%2064v32c0%2035.3%2028.7%2064%2064%2064H181.3l-19.4%2038.7C157.6%20462.1%20162.3%20472%20170%20472h108c7.7%200%2012.4-9.9%208.1-16.7L266.7%20416H384c35.3%200%2064-28.7%2064-64z'/%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <!-- Icon library (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --hacker-green: #00ff41;
+            --dark-bg: #0a0a0a;
+            --danger-red: #ff003c;
+        }
+        body { 
+            font-family: 'VT323', monospace; 
+            background-color: var(--dark-bg); 
+            color: var(--hacker-green);
+        }
+        .btn {
+            background: transparent;
+            border: 1px solid var(--hacker-green);
+            color: var(--hacker-green);
+            transition: all 0.2s ease-in-out;
+            padding: 0.5rem 1rem;
+            border-radius: 0;
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn:hover:not(:disabled) {
+            background: var(--hacker-green);
+            color: var(--dark-bg);
+        }
+        .btn-danger {
+            border-color: var(--danger-red);
+            color: var(--danger-red);
+        }
+        .btn-danger:hover {
+             background: var(--danger-red);
+             color: var(--dark-bg);
+        }
+        .btn-icon {
+            width: 44px;
+            height: 44px;
+            padding: 0;
+        }
+        .link {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            transition: color 0.2s;
+        }
+        .link:hover {
+            color: white;
+        }
+        input[type="text"], input[type="url"] {
+            background-color: rgba(0, 255, 65, 0.05);
+            border: 1px solid var(--hacker-green);
+            color: var(--hacker-green);
+            border-radius: 0;
+            padding: 0.75rem;
+            font-size: 1.125rem;
+        }
+        input:focus { 
+            outline: none; 
+            border-color: white;
+        }
+        .form-container {
+            border: 1px solid var(--hacker-green);
+            background-color: rgba(0, 255, 65, 0.05);
+        }
+        .list-item {
+            border: 1px solid rgba(0, 255, 65, 0.5);
+            transition: all 0.2s ease-in-out;
+        }
+        .list-item:hover {
+            border-color: var(--hacker-green);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6">
+    <div class="container mx-auto">
+        <header class="text-center mb-12">
+            <div class="flex justify-center items-center gap-x-4">
+                <!-- Hacker Icon -->
+                <i class="fa-solid fa-user-secret text-5xl md:text-7xl"></i>
+                <h1 class="text-5xl md:text-7xl font-bold">Admin_Panel</h1>
+            </div>
+            <p class="text-xl mt-4">> Gestionar recursos del sistema.</p>
+            <a href="index.html" class="link text-xl mt-6 inline-block">inicio()</a>
+        </header>
+        
+        <!-- Form Section -->
+        <section class="max-w-2xl mx-auto p-4 sm:p-6 form-container">
+            <h2 class="text-3xl font-bold mb-4">Cargar Herramienta</h2>
+            <form id="tool-form">
+                <input type="hidden" id="tool-id">
+                <div class="mb-4">
+                    <label for="tool-title" class="block mb-2 text-xl">> Título:</label>
+                    <input type="text" id="tool-title" class="w-full" placeholder="Ej: Nmap" required>
+                </div>
+                <div class="mb-4">
+                    <label for="tool-url" class="block mb-2 text-xl">> URL:</label>
+                    <input type="url" id="tool-url" class="w-full" placeholder="https://nmap.org" required>
+                </div>
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                    <button type="submit" class="btn w-full">Guardar</button>
+                    <button type="button" id="cancel-edit-btn" class="btn btn-danger w-full hidden">Cancelar</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- List Section -->
+        <section class="mt-12">
+            <h2 class="text-3xl font-bold mb-4 text-center">Herramientas Activas</h2>
+            <div id="admin-tool-list" class="space-y-4 max-w-4xl mx-auto"></div>
+            <div id="loading-indicator" class="text-center mt-8"><p class="text-2xl">> Cargando...</p></div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toolForm = document.getElementById('tool-form');
+            const toolIdInput = document.getElementById('tool-id');
+            const toolTitleInput = document.getElementById('tool-title');
+            const toolUrlInput = document.getElementById('tool-url');
+            const cancelEditBtn = document.getElementById('cancel-edit-btn');
+            const adminToolList = document.getElementById('admin-tool-list');
+            const loadingIndicator = document.getElementById('loading-indicator');
+
+            async function fetchAndRenderAdminList() {
+                loadingIndicator.style.display = 'block';
+                adminToolList.innerHTML = '';
+                try {
+                    const response = await fetch('api.php');
+                    if (!response.ok) throw new Error('// Error de conexión.');
+                    const tools = await response.json();
+                    
+                    if (tools.length === 0) {
+                        adminToolList.innerHTML = `<p class="text-center text-2xl">> No hay herramientas en el sistema.</p>`;
+                    } else {
+                        tools.forEach(tool => {
+                            const item = document.createElement('div');
+                            item.className = 'list-item flex flex-col sm:flex-row sm:items-center justify-between p-4';
+                            item.innerHTML = `
+                                <div class="flex-grow overflow-hidden w-full">
+                                    <p class="font-bold text-xl truncate" title="${tool.title}">${tool.title}</p>
+                                    <a href="${tool.url}" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-400 truncate block mt-1 link" title="${tool.url}">${tool.url}</a>
+                                </div>
+                                <div class="w-full flex justify-end space-x-3 mt-4 sm:w-auto sm:mt-0">
+                                    <button data-id="${tool.id}" data-title="${tool.title}" data-url="${tool.url}" class="edit-btn btn btn-icon text-lg" aria-label="Editar">
+                                        <i class="fas fa-pencil-alt pointer-events-none"></i>
+                                    </button>
+                                    <button data-id="${tool.id}" class="delete-btn btn btn-danger btn-icon text-lg" aria-label="Eliminar">
+                                        <i class="fas fa-trash-alt pointer-events-none"></i>
+                                    </button>
+                                </div>`;
+                            adminToolList.appendChild(item);
+                        });
+                    }
+                } catch (error) {
+                    adminToolList.innerHTML = `<p class="text-red-500 text-center text-2xl">${error.message}</p>`;
+                } finally {
+                    loadingIndicator.style.display = 'none';
+                }
+            }
+
+            function resetForm() {
+                toolForm.reset();
+                toolIdInput.value = '';
+                cancelEditBtn.classList.add('hidden');
+            }
+
+            toolForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const id = toolIdInput.value;
+                const title = toolTitleInput.value.trim();
+                const url = toolUrlInput.value.trim();
+                if (!title || !url) return;
+
+                const isUpdating = id !== '';
+                const method = isUpdating ? 'PUT' : 'POST';
+                const body = JSON.stringify({ id, title, url });
+
+                try {
+                    const response = await fetch('api.php', {
+                        method: method,
+                        headers: { 'Content-Type': 'application/json' },
+                        body: body
+                    });
+                    if (!response.ok) throw new Error('// La petición falló.');
+                    resetForm();
+                    fetchAndRenderAdminList();
+                } catch (error) {
+                    console.error('Error al guardar:', error);
+                    alert('// Error al guardar la herramienta.');
+                }
+            });
+
+            adminToolList.addEventListener('click', async (e) => {
+                const target = e.target.closest('button');
+                if (!target) return;
+                
+                const id = target.dataset.id;
+
+                if (target.classList.contains('delete-btn')) {
+                    if (confirm('>> ¿Estás seguro de que quieres eliminar este proceso?')) {
+                        try {
+                            const response = await fetch(`api.php?id=${id}`, { method: 'DELETE' });
+                            if (!response.ok) throw new Error('// Error al eliminar.');
+                            fetchAndRenderAdminList();
+                        } catch (error) {
+                             console.error('Error al eliminar:', error);
+                            alert('// No se pudo eliminar la herramienta.');
+                        }
+                    }
+                }
+
+                if (target.classList.contains('edit-btn')) {
+                    toolIdInput.value = id;
+                    toolTitleInput.value = target.dataset.title;
+                    toolUrlInput.value = target.dataset.url;
+                    cancelEditBtn.classList.remove('hidden');
+                    toolForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    toolTitleInput.focus();
+                }
+            });
+            
+            cancelEditBtn.addEventListener('click', resetForm);
+            fetchAndRenderAdminList();
+        });
+    </script>
+</body>
+</html>
